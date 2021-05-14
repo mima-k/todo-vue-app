@@ -2,11 +2,13 @@
   <div id="todo">
     <!-- 新規登録フォーム -->
     <h2>新しい作業の追加</h2>
-    <form class="add-form" v-on:submit.prevent="doAdd">
+    <form class="add-form" @submit.prevent="doAdd">
       <!-- コメント入力フォーム -->
       コメント <input type="text" ref="comment" />
       <!-- 追加ボタンのモック -->
-      <button type="submit" class="add-btn">追加</button>
+      <v-btn class="add-btn" @click="doAdd">
+        追加
+      </v-btn>
     </form>
     <!-- 絞り込みラジオボタン -->
     <!-- <v-radio-group v-model="radios" :mandatory="false"> -->
@@ -15,6 +17,7 @@
         label.label
       }}
     </label>
+
     <!-- </v-radio-group> -->
     <!-- ToDo テーブル -->
     <table>
@@ -146,6 +149,9 @@ export default {
     doRemove: function(item) {
       var index = this.todos.indexOf(item);
       this.todos.splice(index, 1);
+    },
+    submit() {
+      this.$v.$touch();
     },
   },
 };
