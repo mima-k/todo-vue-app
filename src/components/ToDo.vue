@@ -2,9 +2,14 @@
   <div id="todo">
     <!-- 新規登録フォーム -->
     <h2>新しい作業の追加</h2>
-    <form class="add-form" @submit.prevent="doAdd">
+    <form class="add-form" submit.prevent>
       <!-- コメント入力フォーム -->
-      コメント <input type="text" ref="comment" />
+      <!-- コメント <input type="text" ref="comment" /> -->
+      <v-text-field
+        v-model="comment"
+        ref="comment"
+        label="コメント"
+      ></v-text-field>
       <!-- 追加ボタンのモック -->
       <v-btn class="add-btn" @click="doAdd">
         追加
@@ -70,7 +75,7 @@ var todoStorage = {
 export default {
   name: "ToDo",
   props: {
-    msg: String,
+    value: { type: String },
   },
 
   // el: "#todo",
@@ -78,6 +83,7 @@ export default {
     return {
       // 使用するデータ
       todos: [],
+      comment: "",
       current: -1,
       // ★STEP11＆STEP13 各状態のラベル
       options: [
